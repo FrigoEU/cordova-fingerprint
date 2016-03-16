@@ -13,7 +13,6 @@ public class FPMatch {
 
 	public native int InitMatch();
 	public native int MatchTemplate( byte[] piFeatureA, byte[] piFeatureB);
-	public native int MatchTemplateOne( byte[] piFeatureA, byte[] piFeatureB, int bSize);
 	
 	static {
 		System.loadLibrary("fgtitalg");
