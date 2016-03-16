@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fingerprint" version="0.0.1">
+  <name>Fingerprint</name>
+  <description>Care Solutions Fingerprint Plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,care,solutions,fingerprint</keywords>
+  <js-module src="www/fingerprint.js" name="fingerprint">
+    <clobbers target="fingerprint" />
+  </js-module>
+  <platform name="android">
+    <source-file src="src/android/Fingerprint.java" target="src/com/caresolutions/cordova/fingerprint" />
+    <!-- <lib-file src="src/android/fpengine.so"/> -->
+    <feature name="Fingerprint">
+        <param name="android-package" value="com.caresolutions.cordova.fingerprint" />
+        </feature>
+  </platform>
+</plugin>
