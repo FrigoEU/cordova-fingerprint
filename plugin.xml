@@ -9,7 +9,9 @@
   </js-module>
   <platform name="android">
     <source-file src="src/android/Fingerprint.java" target-dir="src/com/caresolutions/cordova/fingerprint" />
-    <!-- <lib-file src="src/android/fpengine.so"/> -->
+    <source-file src="src/android/Fpcore.java" target-dir="src/com/caresolutions/cordova/fingerprint" />
+    <lib-file src="src/android/libfpcore.so"/>
+    <lib-file src="src/android/libfgtitalg.so"/>
     <config-file target="config.xml" parent="/*">
       <feature name="Fingerprint">
         <param name="android-package" value="com.caresolutions.cordova.fingerprint.Fingerprint" />

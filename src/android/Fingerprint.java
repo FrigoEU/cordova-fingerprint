@@ -14,6 +14,7 @@ public class Fingerprint extends CordovaPlugin {
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     if ("test".equals(action)) {
+      Fpcore fp = Fpcore.getInstance();
       String message = "returning: " + args.getString(0);
       callbackContext.success(message);
       return true;
