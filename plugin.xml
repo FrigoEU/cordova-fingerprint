@@ -9,7 +9,7 @@
   </js-module>
   <platform name="android">
     <source-file src="src/android/Fingerprint.java" target-dir="src/com/caresolutions/cordova/fingerprint" />
-    <source-file src="src/android/Fpcore.java" target-dir="src/com/caresolutions/cordova/fingerprint" />
+    <source-file src="src/android/FPMatch.java" target-dir="src/com/fgtit/fpcore" />
     <!-- <lib-file src="src/android/libfpcore.so"/> -->
     <!-- <lib-file src="src/android/libfgtitalg.so"/> -->
     <source-file src="src/android/libfpcore.so" target-dir="libs/armeabi-v7a"/>
