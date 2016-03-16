@@ -31,8 +31,8 @@ public class Fingerprint extends CordovaPlugin {
 
       FPMatch fp = FPMatch.getInstance();
 
-      int res1 = fp.MatchTemplate(index, index2);
-      int res2 = fp.MatchTemplate(index, middle);
+      int res1 = fp.MatchTemplateOne(index, index2, index2.length);
+      int res2 = fp.MatchTemplateOne(index, middle, middle.length);
       String message = "returning: " + args.getString(0) + " " + Integer.toString(res1) + " " + Integer.toString(res2);
       callbackContext.success(message);
       return true;
