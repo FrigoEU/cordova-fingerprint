@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.fgtit.fpcore.FPMatch;
+import com.fgtit.data.Conversions;
 
 public class Fingerprint extends CordovaPlugin {
   public Fingerprint () {
@@ -30,11 +31,23 @@ public class Fingerprint extends CordovaPlugin {
       byte[] middle2 = Fingerprint.toBytes( 3, 1, 82, 35, 125, 0, 128, 6, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 192, 2, 56, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 9, 99, 190, 86, 14, 162, 254, 38, 35, 26, 158, 47, 39, 213, 222, 49, 172, 40, 222, 63, 52, 233, 94, 22, 62, 87, 254, 55, 63, 170, 190, 80, 5, 160, 183, 66, 135, 89, 223, 39, 9, 166, 223, 74, 15, 33, 159, 105, 16, 37, 127, 91, 146, 100, 159, 26, 147, 35, 63, 41, 19, 101, 191, 104, 22, 101, 223, 65, 24, 98, 191, 57, 30, 146, 127, 79, 183, 147, 127, 31, 56, 107, 255, 49, 58, 149, 31, 35, 61, 107, 159, 92, 190, 41, 127, 67, 39, 102, 252, 68, 12, 94, 189, 55, 17, 78, 125, 75, 156, 228, 221, 82, 31, 15, 221, 68, 170, 231, 221, 24, 173, 149, 125, 29, 48, 152, 125, 58, 20, 78, 186, 53, 134, 129, 215, 45, 152, 100, 109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 82, 35, 125, 0, 128, 6, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 128, 2, 192, 2, 56, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 9, 99, 158, 86, 14, 162, 254, 38, 35, 26, 158, 67, 166, 231, 62, 63, 52, 233, 94, 23, 62, 87, 190, 54, 63, 170, 254, 80, 5, 160, 183, 66, 135, 89, 223, 39, 9, 166, 223, 74, 15, 33, 159, 105, 16, 37, 127, 91, 146, 100, 159, 26, 147, 35, 63, 41, 19, 101, 223, 103, 150, 102, 31, 65, 24, 98, 191, 75, 156, 228, 223, 57, 30, 146, 127, 82, 31, 80, 31, 68, 170, 231, 223, 29, 48, 152, 127, 79, 183, 147, 127, 31, 56, 107, 255, 49, 58, 149, 31, 35, 189, 171, 31, 92, 190, 41, 127, 49, 172, 40, 220, 68, 12, 94, 189, 55, 17, 14, 93, 49, 40, 85, 61, 58, 20, 78, 186, 54, 6, 129, 215, 45, 152, 100, 109, 49, 27, 101, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
 
       FPMatch fp = FPMatch.getInstance();
+      Conversions conv = Conversions.getInstance();
+
       fp.InitMatch();
 
-      int res1 = fp.MatchTemplate(index, index2);
-      int res2 = fp.MatchTemplate(index, middle);
-      String message = "returning: " + args.getString(0) + " " + Integer.toString(res1) + " " + Integer.toString(res2);
+      byte[] index_iso = new byte[512];
+      conv.StdToIso(2, index, index_iso);
+      byte[] index2_iso = new byte[512];
+      conv.StdToIso(2, index2, index2_iso);
+      byte[] middle_iso = new byte[512];
+      conv.StdToIso(2, middle, middle_iso);
+      byte[] middle2_iso = new byte[512];
+      conv.StdToIso(2, middle2, middle2_iso);
+
+      int res1 = fp.MatchTemplate(index_iso, index2_iso);
+      int res2 = fp.MatchTemplate(index_iso, middle_iso);
+      int res3 = fp.MatchTemplate(index_iso, index_iso);
+      String message = "returning: " + args.getString(0) + " " + Integer.toString(res1) + " " + Integer.toString(res2) + " " + Integer.toString(res3);
       callbackContext.success(message);
       return true;
     }
