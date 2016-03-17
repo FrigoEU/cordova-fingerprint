@@ -35,14 +35,26 @@ public class Fingerprint extends CordovaPlugin {
 
       fp.InitMatch();
 
-      byte[] index_iso = new byte[512];
-      conv.StdToIso(2, index, index_iso);
-      byte[] index2_iso = new byte[512];
-      conv.StdToIso(2, index2, index2_iso);
-      byte[] middle_iso = new byte[512];
-      conv.StdToIso(2, middle, middle_iso);
-      byte[] middle2_iso = new byte[512];
-      conv.StdToIso(2, middle2, middle2_iso);
+      byte[] index_coord = new byte[512];
+      byte[] index2_coord = new byte[512];
+      byte[] middle_coord = new byte[512];
+      byte[] middle2_coord = new byte[512];
+
+      byte[] index_iso = new byte[378];
+      byte[] index2_iso = new byte[378];
+      byte[] middle_iso = new byte[378];
+      byte[] middle2_iso = new byte[378];
+
+
+      conv.StdChangeCoord(index, 256, index_coord, 1);
+      conv.StdChangeCoord(index2, 256, index2_coord, 1);
+      conv.StdChangeCoord(middle, 256, middle_coord, 1);
+      conv.StdChangeCoord(middle2, 256, middle2_coord, 1);
+
+      conv.StdToIso(2, index_coord, index_iso);
+      conv.StdToIso(2, index2_coord, index2_iso);
+      conv.StdToIso(2, middle_coord, middle_iso);
+      conv.StdToIso(2, middle2_coord, middle2_iso);
 
       int res1 = fp.MatchTemplate(index_iso, index2_iso);
       int res2 = fp.MatchTemplate(index_iso, middle_iso);
